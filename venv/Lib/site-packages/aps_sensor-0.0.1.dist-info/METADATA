@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: APS-sensor
+Version: 0.0.1
+Author: Jidnesh
+Author-email: jidneshpatil866@gmail.com
+Requires-Dist: pymongo==4.2.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: requires-dist

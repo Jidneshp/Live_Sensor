@@ -1,0 +1,7 @@
+setup.py
+APS_sensor.egg-info/PKG-INFO
+APS_sensor.egg-info/SOURCES.txt
+APS_sensor.egg-info/dependency_links.txt
+APS_sensor.egg-info/requires.txt
+APS_sensor.egg-info/top_level.txt
+src/__init__.py

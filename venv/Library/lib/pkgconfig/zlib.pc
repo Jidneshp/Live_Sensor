@@ -1,0 +1,13 @@
+prefix=J:/Project/ineuron/Live_sensor/venv/Library
+exec_prefix=J:/Project/ineuron/Live_sensor/venv/Library
+libdir=J:/Project/ineuron/Live_sensor/venv/Library/lib
+sharedlibdir=J:/Project/ineuron/Live_sensor/venv/Library/lib
+includedir=J:/Project/ineuron/Live_sensor/venv/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.3.1
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
