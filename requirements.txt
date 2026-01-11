@@ -1,2 +1,6 @@
 pymongo==4.2.0
--e .
+numpy
+pandas
+seaborn
+matplolib
+#-e .
