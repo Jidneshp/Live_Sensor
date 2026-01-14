@@ -1,6 +1,7 @@
-pymongo==4.2.0
-numpy
+pymongo[srv]
+ipykernel
+dnspython
+python-dotenv
 pandas
-seaborn
-matplolib
+numpy
 #-e .
