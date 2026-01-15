@@ -34,16 +34,3 @@ class DataIngestionConfig:
             
             self.train_test_split_ratio: float = training_pipeline.DATA_INGESTION_TRAIN_TEST_SPLIT_RATION
             self.collection_name: str = training_pipeline.DATA_INGESTION_COLLECTION_NAME
-
-
-
-
-    
-
-
-    
-   
-   
-
-
-

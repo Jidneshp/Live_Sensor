@@ -4,4 +4,5 @@ dnspython
 python-dotenv
 pandas
 numpy
+certifi
 #-e .
