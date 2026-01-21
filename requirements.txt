@@ -6,4 +6,9 @@ pandas
 numpy
 certifi
 scikit-learn
+seaborn
+matplotlib
+xgboost
+catboost
+imbalanced-learn
 #-e .
