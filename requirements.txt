@@ -11,4 +11,7 @@ matplotlib
 xgboost
 catboost
 imbalanced-learn
+PyYAML
+dill
+setuptools
 #-e .

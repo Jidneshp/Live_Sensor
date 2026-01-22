@@ -1,15 +1,53 @@
-import sys
-from src.logger import logging
-from src.exception import CustomException
-from src.utils import upload_data_to_mongodb
+from sensor.configuration.mongo_db_connection import MongoDBClient
+from sensor.exception import SensorException
+import os , sys
+from sensor.logger import logging
+#from  sensor.utils import dump_csv_file_to_mongodb_collecton
+#from sensor.entity.config_entity  import TrainingPipelineConfig,DataIngestionConfig
+
+from sensor.pipeline.training_pipeline import TrainPipeline
+
+# def test_exception():
+#     try:
+#         logging.info("ki yaha p bhaiaa ek error ayegi diveision by zero wali error ")
+#         a=1/0
+#     except Exception as e:
+#        raise SensorException(e,sys) 
+
+
 
 if __name__ == "__main__":
-    try:
-        file_path="J:\Project\ineuron\Live_sensor\Aps_failure_data.csv"
-        database_name = 'Jidneshp'
-        collection_name= 'APS sensor data'
-        
-        upload_data_to_mongodb(file_path, database_name, collection_name)
-        
-    except Exception as e:
-        raise CustomException(e, sys)
+
+    # file_path="/Users/myhome/Downloads/sensorlive/aps_failure_training_set1.csv"
+    # database_name="ineuron"
+    # collection_name ="sensor"
+    # dump_csv_file_to_mongodb_collection(file_path,database_name,collection_name)
+
+    training_pipeline = TrainPipeline()
+    training_pipeline.run_pipeline()
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+    # try:
+    #     test_exception()
+    # except Exception as e:
+    #     print(e)
