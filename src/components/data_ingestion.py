@@ -10,10 +10,14 @@ from sklearn.model_selection import train_test_split
 from src.entity.config_entity import DataIngestionConfig
 from src.entity.artifact_entity import DataIngestionArtifiact 
 
+from src.utils.main_utils import read_yaml
+from src.constant.training_pipeline import SCHEMA_FILE_PATH
+
 class DataIngestion:
     def __init__(self, data_ingestion_config:DataIngestionConfig):
         try:
             self.data_ingestion_config = data_ingestion_config
+            self._schema_config = read_yaml(SCHEMA_FILE_PATH)
             
         except Exception as e:
             raise CustomException(e,sys)
@@ -31,6 +35,11 @@ class DataIngestion:
             
             dataframe = sensor_data.export_collection_as_dataframe(collection_name=self.data_ingestion_config.collection_name)
             
+            if dataframe.empty:
+                raise Exception(f"No data found in MongoDB collection: {self.data_ingestion_config.collection_name}")
+            
+            logging.info(f"Exported dataframe shape: {dataframe.shape}")
+            
             feature_store_file_path = self.data_ingestion_config.feature_store_file_path
             
             # Creating Folder
@@ -45,7 +54,10 @@ class DataIngestion:
         
     def split_data_into_train_test(self, dataframe:DataFrame)-> None:
         try:
-            logging.info("Performing Train and Test split on the Data Set")
+            if dataframe.empty:
+                raise Exception("Cannot split empty dataframe. Please ensure data is available in MongoDB collection.")
+            
+            logging.info(f"Performing Train and Test split on the Data Set. Dataframe shape: {dataframe.shape}")
             train_set, test_set = train_test_split(
                 dataframe, test_size=self.data_ingestion_config.train_test_split_ratio
             )
@@ -73,6 +85,11 @@ class DataIngestion:
     def initiate_data_ingestion(self)-> DataIngestionArtifiact:
         try:
             dataframe = self.export_data_in_feature_store()
+            
+            # Drop columns if specified in schema
+            if 'drop_columns' in self._schema_config and self._schema_config['drop_columns']:
+                dataframe = dataframe.drop(self._schema_config['drop_columns'], axis=1)
+                logging.info(f"Dataframe shape after dropping columns: {dataframe.shape}")
             
             self.split_data_into_train_test(dataframe=dataframe)
             

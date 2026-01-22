@@ -29,10 +29,10 @@ class SensorData:
             data_frame.reset_index(drop=True, inplace=True)
             records =list(json.loads(data_frame.T.to_json()).values)
             
-            if database is None:
+            if database_name is None:
                 collection = self.mongo_client.database[collection_name]
             else:
-                collection = self.mongo_client[database_name][collection_name]
+                collection = self.mongo_client.client[database_name][collection_name]
             collection.insert_many(records)
             
         except Exception as e:
@@ -43,13 +43,13 @@ class SensorData:
         Exports the collection from MongoDB as a data Frame
         '''
         try:
-            if database is None:
+            if database_name is None:
                 collection = self.mongo_client.database[collection_name]
             else:
-                collection = self.mongo_client[database_name][collection_name]
+                collection = self.mongo_client.client[database_name][collection_name]
             df = pd.DataFrame(list(collection.find()))
             
-            if '_id' in df.columns.to_list:
+            if '_id' in df.columns.to_list():
                 df = df.drop(columns=['_id'], axis=1)
                 
             df.replace({'na':np.nan}, inplace=True)

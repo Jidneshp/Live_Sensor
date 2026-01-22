@@ -22,14 +22,14 @@ class TrainPipeline:
             
             data_ingestion = DataIngestion(data_ingestion_config=self.data_ingestion_config)
             
-            data_ingestion_artifact = data_ingestion.initiate_data_ingestion
+            data_ingestion_artifact = data_ingestion.initiate_data_ingestion()
             
             logging.info(f'Data Ingestion Completed and artifact: {data_ingestion_artifact}')
             
             return data_ingestion_artifact
             
-        except  Exception as e:
-            raise  CustomException(e,sys)
+        except Exception as e:
+            raise CustomException(e,sys)
 
 
     def start_data_validation(self, data_ingestion_artifact:DataIngestionArtifiact)->DataValidationArtifact:
@@ -42,15 +42,15 @@ class TrainPipeline:
             
             return data_validation_artifact
         
-        except  Exception as e:
-            raise  CustomException(e,sys)
+        except Exception as e:
+            raise CustomException(e,sys)
         
         
     def run_pipeline(self):
         try:
-            data_ingestion_artifact:DataIngestionArtifiact = self.start_data_ingestion
+            data_ingestion_artifact:DataIngestionArtifiact = self.start_data_ingestion()
             
-            data_validation_artifact:DataValidationArtifact = self.start_data_validation
+            data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
             
-        except  Exception as e:
-            raise  CustomException(e,sys)
+        except Exception as e:
+            raise CustomException(e,sys)

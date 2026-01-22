@@ -49,7 +49,7 @@ class DataValidation:
                     numeric_col_present=False
                     missing_num_cols.append(num_col)
                 
-                logging.info(f'Missing Columns in DataFrame: {missing_num_cols}')
+            logging.info(f'Missing Columns in DataFrame: {missing_num_cols}')
                 
             return numeric_col_present
         
