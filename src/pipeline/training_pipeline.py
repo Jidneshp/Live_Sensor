@@ -7,9 +7,10 @@ from src.exception import CustomException
 from src.components.data_ingestion import DataIngestion
 from src.components.data_validation import DataValidation 
 from src.components.data_transformation import DataTransformation
+from src.components.model_training import ModelTrainer
 from src.entity.artifact_entity import DataIngestionArtifiact
-from src.entity.artifact_entity import DataIngestionArtifiact, DataValidationArtifact
-from src.entity.config_entity import TrainingPipelineConfig, DataIngestionConfig, DataValidationConfig, DataTransformationConfig
+from src.entity.artifact_entity import DataIngestionArtifiact, DataValidationArtifact, DataTransformationArtifact
+from src.entity.config_entity import TrainingPipelineConfig, DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig
 
 class TrainPipeline:
     
@@ -60,6 +61,19 @@ class TrainPipeline:
         except Exception as e:
             raise CustomException(e,sys)
         
+    def start_model_training(self, data_transformation_artifact: DataTransformationArtifact):
+        try:
+            model_training_config = ModelTrainerConfig(training_pipeline_config=self.training_pipeline_config)
+            
+            model_training = ModelTrainer(model_trainer_config=model_training_config, data_transformation_artifact=data_transformation_artifact)
+            
+            model_training_artifact = model_training.initiate_model_trainer()
+            
+            return model_training_artifact
+        
+        except Exception as e:
+            raise CustomException(e,sys)
+        
         
     def run_pipeline(self):
         try:
@@ -68,6 +82,8 @@ class TrainPipeline:
             data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
             
             data_transformation_artifact = self.start_data_transformation(data_validation_artifact=data_validation_artifact)
+            
+            model_training_artifact = self.start_model_training(data_transformation_artifact=data_transformation_artifact)
             
         except Exception as e:
             raise CustomException(e,sys)

@@ -43,3 +43,14 @@ Data Transformation Constants
 DATA_TRANSFORMATION_DIR_NAME:str = 'data_transformation'
 DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR:str = 'transformed'
 DATA_TRANSFORMATION_TRANSFORMED_OBJ_DIR:str = 'transformed_object'
+
+
+"""
+Model Training related Constant
+    """
+
+MODEL_TRAINER_DIR_NAME:str = 'model_trainer'
+TRAINED_MODEL_DIR:str = 'trained_model'
+TRAINED_MODEL_FILE_NAME:str = 'model.pkl'
+MODEL_EXPECTED_ACC_SCORE:float = 0.6
+MODEL_OVERFITING_UNDEFITING_THRESHOLD:float = 0.05 

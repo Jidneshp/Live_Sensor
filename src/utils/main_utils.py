@@ -62,3 +62,14 @@ def save_obj(file_path:str, obj:object)-> None:
         logging.info("Exited the save_obj method of Utils")
     except Exception as e:
         raise CustomException(e,sys)
+    
+    
+def load_obj(file_path:str)->object:
+    try:
+        if not os.path.exists(file_path):
+            raise Exception (f'The file: {file_path} does not exist')
+        with open (file_path, 'rb') as f:
+            return dill.load(f)
+        
+    except Exception as e:
+        raise CustomException(e,sys)        
