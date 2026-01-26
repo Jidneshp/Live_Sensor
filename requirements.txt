@@ -15,4 +15,6 @@ PyYAML
 dill
 setuptools
 scipy
+fastapi
+uvicorn
 #-e .

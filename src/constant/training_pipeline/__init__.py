@@ -5,6 +5,7 @@ PIPELINE_NAME = "sensor"
 ARTIFACT_DIR = "artifact"
 FILE_NAME = "sensor.csv"
 
+SAVED_MODEL_DIR = os.path.join('saved_models')
 
 TRAIN_FILE_NAME: str = "train.csv"
 TEST_FILE_NAME: str = "test.csv"
@@ -54,3 +55,12 @@ TRAINED_MODEL_DIR:str = 'trained_model'
 TRAINED_MODEL_FILE_NAME:str = 'model.pkl'
 MODEL_EXPECTED_ACC_SCORE:float = 0.6
 MODEL_OVERFITING_UNDEFITING_THRESHOLD:float = 0.05 
+
+
+'''
+Model Evaluation related constant
+    '''
+    
+MODEL_EVALUATION_DIR_NAME:str = 'model_evaluation'
+MODEL_EVALUATION_THRESHOLD_SCORE:float = 0.02
+MODEL_EVALUATION_REPORT_NAME:str = 'report.yaml'
