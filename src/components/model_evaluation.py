@@ -83,7 +83,7 @@ class ModelEvaluation:
             else:
                 is_model_accepted=False
                 
-            model_eval_artifacrt = ModelEvaluationArtifact(
+            model_evaluation_artifact = ModelEvaluationArtifact(
                     is_model_acceptable=is_model_accepted,
                     improved_accuracy=improved_accuracy,
                     best_model_path=latest_model_path,
@@ -91,13 +91,13 @@ class ModelEvaluation:
                     train_model_metric_artifact=trained_metric,
                     best_model_metric_artifact=latest_metric
             )
-            model_eval_report = model_eval_artifacrt.__dict__
+            model_eval_report = model_evaluation_artifact.__dict__
             
             # Savinig the report
             write_yaml(self.model_eval_config.report_file_path, model_eval_report)
-            logging.info(f'Model Evaluation Artifact: {model_eval_artifacrt}')
+            logging.info(f'Model Evaluation Artifact: {model_evaluation_artifact}')
             
-            return model_eval_artifacrt
+            return model_evaluation_artifact
         
         except Exception as e:
             raise CustomException(e,sys) 
